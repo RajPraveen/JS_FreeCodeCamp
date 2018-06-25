@@ -1,0 +1,27 @@
+
+//let result = [];
+function steamrollArray(arr) {
+  // I'm a steamroller, baby
+  let result = [];
+    function  returnNotArray(arr){
+        for(let i = 0; i<arr.length ;i++)
+          Array.isArray(arr[i])? arr[i].length != 0? returnNotArray(arr[i]) : null : result.push(arr[i]); 
+  }
+
+  returnNotArray(arr);
+  return result;
+}
+
+let test =steamrollArray([1, [2], [3, [[4]]]]);
+
+
+
+
+
+
+
+//steamrollArray([[["a"]], [["b"]]]);
+//steamrollArray([1, [2], [3, [[4]]]]);
+//steamrollArray([1, {}, [3, [[4]]]]);
+
+console.log(test);
