@@ -1,0 +1,25 @@
+function binaryAgent(str) {
+
+  function two_power(i){
+      if(i > 0)
+        return two_power(--i) * 2;
+      else
+        return 1;
+  }
+  
+  let result = str.split(" ").map( value => {
+      let exp = /[1]/g;
+      let count =0;
+      while(arr = exp.exec(value))
+        count += two_power(7-arr.index);
+      return String.fromCharCode(count);
+      
+  }).join("");
+  
+  
+  return result;
+}
+
+binaryAgent("01000001 01110010 01100101 01101110 00100111 01110100 00100000 01100010 01101111 01101110 01100110 01101001 01110010 01100101 01110011 00100000 01100110 01110101 01101110 00100001 00111111");
+
+//binaryAgent("01000001");
