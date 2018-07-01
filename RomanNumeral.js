@@ -1,101 +1,99 @@
 function convertToRoman(num) {
-  let test =  num.toString();
-  let romanArray = [];
+    let test =  num.toString();
+    let romanArray = [];
+    let testNum = 0;
+    let result = test.split('').reverse();
+    let flag = 0;       
 
-  let result = test.split('').reverse();
-
-  for( let index in result){
-      result[index] = Number(result[index]) * Math.pow(10,index);
-  }
-  console.log(result);
-
-  let romanTable = [
-    [1,"I"],
-    [5,"V"],
-    [10,"X"],
-    [50,"L"],
-    [100,"C"],
-    [500,"D"],
-    [1000,"M"]
-  ];
-
-  let romanMap = new Map(romanTable);
-  //console.log(romanMap);
-  
-
-  let newRomanTable = romanTable.reverse();
-  //console.log(newRomanTable);
-  
-  let myNum = 4;
-  let regex = /^[5]/g;
-
-  let starter = (searchValue) => {
-   for(let index in newRomanTable)
-      if(searchValue >= newRomanTable[index][0])
-          return [newRomanTable[index],newRomanTable[index -1]];
-  }; 
-
-  let closest = (val, start, end) =>{
-    console.log(val,start,end);
-    
-    return val - start <=2 ? start : end;
-  };
-
-  let range = starter(myNum);
-  console.log(range);
-  
-  let romanConverter = (myNum,start) => {
-    let tempRoma = [];
-    while(myNum > 0){
-    myNum = Math.abs(myNum - start);
-    tempRoma.push(romanMap.get(start));  
+    for( let index in result){
+        result[index] = Number(result[index]) * Math.pow(10,index);
     }
-
-    return tempRoma.join('');
-    
-  }
-  //console.log(closest(myNum,1,5));
+    console.log(result);
   
-  let startPoint = 0;
+    let romanTable = [
+      [1000,"M"],
+      [500,"D"],
+      [100,"C"],
+      [50,"L"],
+      [10,"X"],
+      [5,"V"],
+      [1,"I"]
+    ];
+  
+        let romanMap = new Map(romanTable);
+          /* function to determine the range*/
 
-      
-      if(regex.test(range[0][0]))
-      {
+          let rangeDetermine = function(value){
+                for(let i in romanTable)
+                    if(value >= romanTable[i][0])
+                        return [romanTable[i-1][0],romanTable[i][0]];
+          }
 
-      }
-      else{
-        startPoint = closest(myNum, range[0][0],range[1][0]);
-         console.log(startPoint);
+          let startDetermine = function(value,startRange,endRange){
+              let regex = /^[1]/g;
+              return (value - startRange) < (endRange - value) ? startRange : regex.test(endRange - value) ? endRange : startRange;
+          }
 
-        if(myNum - range[0][0] > 2){
-          //do something
-          console.log("greater than 3");
-          let tempArray = 0;
-          tempArray = romanConverter(myNum,range[1][0]);
-          romanArray.push(tempArray);
-          
-          
+          let romanUpdate = function(tempNum,negator){
+         
+              if((tempNum - negator) >= 0)
+              { 
+                 tempNum = tempNum - negator;
+              }
+               else{
+               // console.log("Negative");
+                 tempNum = Math.abs(tempNum - negator);
+                 flag = 1;
+               }
+                 //console.log(tempNum);
+                 
+                return [tempNum , romanMap.get(negator)];
+
         }
-        else{
-          let tempArray = 0;
-          tempArray = romanConverter(myNum,range[0][0]);
-          romanArray.push(tempArray);
-          
-        }
+
+for(let i in result){
+
+        testNum = result[i];
+        //console.log(testNum);
+        let tempRomanArray = [];
+        while(testNum > 0){
+
+            if(testNum >= 1000){
+
+                testNum = testNum - 1000;
+                tempRomanArray.push(romanMap.get(1000));
+            }
+            else{
+                let arr = rangeDetermine(testNum);
+            //console.log(arr);
+            
+            let tempNegator = startDetermine(testNum, arr[1] , arr[0]);
+  
+            //console.log(tempNegator);
+            
+            let tempResult = romanUpdate(testNum,tempNegator);
+            testNum = tempResult[0];
+            tempRomanArray.push(tempResult[1]);
+            }
+   
+            
+            
+            
+          }
         
+        if(flag === 1){
+            romanArray.push(tempRomanArray.reverse().join(""));
+            flag = 0;
+        }
+        else
+            romanArray.push(tempRomanArray.join(""));
+        }
 
-      }
+    return romanArray.reverse().join("").toUpperCase();
     
   
-  
-  console.log(romanArray);
-  
-
-
-  /**
-   * 
-   * Case I 
-   */
 }
- 
- convertToRoman(422);
+      
+    
+
+   convertToRoman(1500);
