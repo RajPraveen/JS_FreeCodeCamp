@@ -1,0 +1,31 @@
+// dummy variables
+
+$border-one : 2px solid red;
+$border-two : 2px solid green;
+$border-three : 2px solid yellow;
+
+
+html, body {
+    margin: 0;
+}
+
+#App{
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+}
+
+#drum-machine {
+    height: 400px;
+    width: 800px;
+    border: $border-one;
+    align-self: center;
+}
+
+#display {
+    border: $border-two;
+    width: 25%;
+    padding : 2%;
+    margin : 2% auto;
+    text-align: center;
+}
