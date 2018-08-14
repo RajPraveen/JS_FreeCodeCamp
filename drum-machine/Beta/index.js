@@ -4,6 +4,9 @@ Author: Raj Praveen R
 Date : 8/13/2018
 */
 //Q, W, E, A, S, D, Z, X, C. 
+
+let drumPad = [];
+
 const DATA = [
     {
         id : 'Q',
@@ -57,12 +60,58 @@ class DrumPad extends React.Component {
         super(props);    
     }
 
+    
+    
+    handleClick = (event) => {
+    
+        let element = document.querySelector("#" + event.target.innerText);
+        this.props.onChange(event.target.id);
+        element.play();
+
+    }
+
     render() {
         return(
-            <button class='drum-pad'>
+            <button className='drum-pad' onClick ={this.handleClick} id={this.props.name}>
                 {this.props.id}
-                <audio src={this.props.music} id={this.props.id}></audio>
+                <audio src={this.props.music} id={this.props.id} className="clip"></audio>
             </button>
+        )
+    }
+}
+
+
+class DrumPadRow extends React.Component {
+    constructor(props) {
+        super(props)
+    }
+
+    render() {
+
+    
+        DATA.forEach((object) => {
+
+            drumPad.push(<DrumPad 
+                            onChange={this.props.onChange}
+                            music = {object.music} 
+                            id={object.id} 
+                            key={object.name}
+                            name={object.name} />
+                            );
+        });
+
+        return(
+                <tr> 
+                    <td>
+                        {drumPad.shift()}
+                    </td>
+                    <td>
+                        {drumPad.shift()}
+                    </td>
+                    <td>
+                        {drumPad.shift()}
+                    </td>
+                </tr>
         )
     }
 }
@@ -76,34 +125,29 @@ class DrumPadContainer extends React.Component {
     
 
     render() {
-        let drumPad = [];
-
-        DATA.forEach((object) => {
-            /* console.log(object); */
-            drumPad.push(<DrumPad 
-                            music = {object.music} 
-                            id={object.id} 
-                            key={object.name} />
-                            );
-        });
-
+      
+        let drumRowObject = [];
+        for(let i=0; i<3; i++)
+            drumRowObject.push(<DrumPadRow onChange={this.props.onChange} key={i} />)
 
         return(
-            
+            <tbody>
+                {drumRowObject}
+            </tbody>
         )
     }
 }
 
 class Display extends React.Component {
     constructor(props) {
-        super(props)
+        super(props);
+        
     }
 
     render() {
         return (
-            <p id="display">
-                TEST
-                {' '}
+            <p id="display">  
+                {this.props.display}
             </p>
         )
     }
@@ -113,18 +157,30 @@ class Display extends React.Component {
 class DrumMachine extends React.Component {
     constructor(props) {
         super(props);
+
+        this.state = {
+            display : ''
+        }
+
+        this.onChange = this.onChange.bind(this);
+
+
+    }
+
+    onChange = (display) => {
+        this.setState({
+            display
+        })
     }
 
 
     render() {
         return (
             <div id="drum-machine">
-                <Display />
-                {/* <DrumPadContainer /> */}
+                <h1>Drum-Machine</h1>
+                <Display display={this.state.display}/>
                 <table>
-                    <tbody>
-                         <DrumPadContainer />
-                    </tbody>
+                    <DrumPadContainer display = {this.state.display} onChange = {this.onChange}/>
                 </table>
             </div>
         )
