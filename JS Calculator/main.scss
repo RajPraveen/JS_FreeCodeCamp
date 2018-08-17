@@ -1,0 +1,128 @@
+/* 
+React APP : Javascript Calculator
+Date : 8/17/2018
+Author : Raj Praveen
+*/
+
+
+$border-one: 2px solid red;
+$border-two: 2px solid green;
+$border-three: 2px solid blue;
+
+html,body {
+    margin: 0;
+    height: 100vh;
+    width: 100vw;
+}
+
+
+.container {
+    height: 400px;
+    width: 25%;
+    border: $border-one;
+    margin: 5% auto;
+    display: flex;
+    flex-direction: column;
+
+    @media (max-width:768px) {
+        width: 90%;
+    }
+}
+
+.display-container {
+    border: $border-two;
+    margin: 0.9%;
+
+    p{
+        text-align: right;
+    }
+}
+
+.button-container {
+    height: 100%;
+    margin: 0 0.9% 0.9% 0.9%; 
+    
+    display: grid;
+    grid-template-columns:repeat(4,1fr);
+    grid-template-rows: repeat(5,1fr);
+    grid-template-areas: 
+    "a di mu su"
+    "on tw th ad"
+    "fo fi si ad"
+    "se ei ni c"
+    "z z p c";
+
+    grid-gap: 2px;
+
+    button {
+        font-weight: bolder;
+    }
+
+    #add {
+        grid-area: ad;
+    }
+
+    #subtract {
+        grid-area: su;
+    }
+
+    #multiply {
+        grid-area: mu;
+    }
+
+    #divide {
+        grid-area: di;
+    }
+    
+    #one {
+        grid-area:on;
+    }
+
+    #two {
+        grid-area: tw;
+    }
+
+    #three {
+        grid-area: th;
+    }
+
+    #four {
+        grid-area: fo;
+    }
+
+    #five {
+        grid-area : fi;
+    }
+
+    #six {
+        grid-area : si;
+    }
+    
+    #seven {
+        grid-area:se;
+    }
+
+    #eight {
+        grid-area:ei;
+    }
+
+    #nine {
+        grid-area: ni;
+    }
+
+    #zero {
+        grid-area: z;
+    }
+
+    #decimal {
+        grid-area: p;
+    }
+    
+    #clear {
+        grid-area: a;
+    }
+
+    #equals {
+        grid-area: c;
+    }
+}
