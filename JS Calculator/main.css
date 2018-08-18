@@ -1,0 +1,237 @@
+/* 
+React APP : Javascript Calculator
+Date : 8/17/2018
+Author : Raj Praveen
+*/
+@import url("https://fonts.googleapis.com/css?family=Caveat");
+@font-face {
+  font-family: "Digital";
+  src: url("//db.onlinewebfonts.com/t/8e22783d707ad140bffe18b2a3812529.eot");
+  src: url("//db.onlinewebfonts.com/t/8e22783d707ad140bffe18b2a3812529.eot?#iefix") format("embedded-opentype"), url("//db.onlinewebfonts.com/t/8e22783d707ad140bffe18b2a3812529.woff2") format("woff2"), url("//db.onlinewebfonts.com/t/8e22783d707ad140bffe18b2a3812529.woff") format("woff"), url("//db.onlinewebfonts.com/t/8e22783d707ad140bffe18b2a3812529.ttf") format("truetype"), url("//db.onlinewebfonts.com/t/8e22783d707ad140bffe18b2a3812529.svg#Digital-7") format("svg");
+}
+
+html, body {
+  margin: 0;
+  height: 100vh;
+  background: linear-gradient(210deg, #FFE347, #FFE347);
+}
+
+.container {
+  border: 2px solid #464524;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  width: 25%;
+  background: #D1D06B;
+  margin: 5% auto;
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  border-radius: 2px;
+  -webkit-box-shadow: 0px 3px 10px black;
+          box-shadow: 0px 3px 10px black;
+}
+
+@media (max-width: 768px) {
+  .container {
+    width: 90%;
+  }
+}
+
+.display-container {
+  height: auto;
+  background: black;
+  border: 2px solid #464524;
+  margin: 1% 1% 1% 1%;
+}
+
+.display-container div {
+  min-height: 50px;
+  margin: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  font-family: 'Digital';
+}
+
+.display-container div:nth-child(2) {
+  font-size: 2rem;
+  color: white;
+}
+
+.display-container div:nth-child(1) {
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  font-size: 1.2rem;
+  color: orange !important;
+}
+
+.button-container {
+  opacity: .7;
+  margin: 0 0.9% 1% 0.9%;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (1fr)[4];
+      grid-template-columns: repeat(4, 1fr);
+  -ms-grid-rows: (1fr)[5];
+      grid-template-rows: repeat(5, 1fr);
+      grid-template-areas: "a di mu su" "on tw th ad" "fo fi si ad" "se ei ni c" "z z p c";
+  grid-gap: 2px;
+}
+
+.button-container .number {
+  background: #575655;
+}
+
+.button-container .operator {
+  background: #191716;
+}
+
+.button-container #add {
+  -ms-grid-row: 2;
+  -ms-grid-row-span: 2;
+  -ms-grid-column: 4;
+  grid-area: ad;
+}
+
+.button-container #subtract {
+  -ms-grid-row: 1;
+  -ms-grid-column: 4;
+  grid-area: su;
+}
+
+.button-container #multiply {
+  -ms-grid-row: 1;
+  -ms-grid-column: 3;
+  grid-area: mu;
+}
+
+.button-container #divide {
+  -ms-grid-row: 1;
+  -ms-grid-column: 2;
+  grid-area: di;
+}
+
+.button-container #one {
+  -ms-grid-row: 2;
+  -ms-grid-column: 1;
+  grid-area: on;
+}
+
+.button-container #two {
+  -ms-grid-row: 2;
+  -ms-grid-column: 2;
+  grid-area: tw;
+}
+
+.button-container #three {
+  -ms-grid-row: 2;
+  -ms-grid-column: 3;
+  grid-area: th;
+}
+
+.button-container #four {
+  -ms-grid-row: 3;
+  -ms-grid-column: 1;
+  grid-area: fo;
+}
+
+.button-container #five {
+  -ms-grid-row: 3;
+  -ms-grid-column: 2;
+  grid-area: fi;
+}
+
+.button-container #six {
+  -ms-grid-row: 3;
+  -ms-grid-column: 3;
+  grid-area: si;
+}
+
+.button-container #seven {
+  -ms-grid-row: 4;
+  -ms-grid-column: 1;
+  grid-area: se;
+}
+
+.button-container #eight {
+  -ms-grid-row: 4;
+  -ms-grid-column: 2;
+  grid-area: ei;
+}
+
+.button-container #nine {
+  -ms-grid-row: 4;
+  -ms-grid-column: 3;
+  grid-area: ni;
+}
+
+.button-container #zero {
+  -ms-grid-row: 5;
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 2;
+  grid-area: z;
+}
+
+.button-container #decimal {
+  -ms-grid-row: 5;
+  -ms-grid-column: 3;
+  grid-area: p;
+  background: #575655;
+}
+
+.button-container #clear {
+  -ms-grid-row: 1;
+  -ms-grid-column: 1;
+  grid-area: a;
+  background: red;
+}
+
+.button-container #equals {
+  -ms-grid-row: 4;
+  -ms-grid-row-span: 2;
+  -ms-grid-column: 4;
+  grid-area: c;
+  background: #0945ec;
+}
+
+.button-container button {
+  font-weight: bolder;
+  padding: 15%;
+  -webkit-transition: background 300ms ease-in-out, color 200ms cubic-bezier(0.075, 0.82, 0.165, 1);
+  transition: background 300ms ease-in-out, color 200ms cubic-bezier(0.075, 0.82, 0.165, 1);
+  border: none;
+  outline: none;
+  color: white;
+}
+
+.button-container button:hover {
+  background: white !important;
+  color: black !important;
+}
+
+footer {
+  font-family: 'Share Tech';
+  text-align: center;
+  margin-bottom: 5%;
+  font-family: 'Caveat';
+  font-size: 1.2rem;
+}
+
+footer b i {
+  color: black;
+  font-size: 1.5rem;
+}
+/*# sourceMappingURL=main.css.map */

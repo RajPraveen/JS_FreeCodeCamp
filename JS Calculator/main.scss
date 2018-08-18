@@ -4,44 +4,84 @@ Date : 8/17/2018
 Author : Raj Praveen
 */
 
+@import url('https://fonts.googleapis.com/css?family=Caveat');
+
+@font-face {
+    font-family: "Digital";
+    src: url("//db.onlinewebfonts.com/t/8e22783d707ad140bffe18b2a3812529.eot");
+    src: url("//db.onlinewebfonts.com/t/8e22783d707ad140bffe18b2a3812529.eot?#iefix") format("embedded-opentype"), url("//db.onlinewebfonts.com/t/8e22783d707ad140bffe18b2a3812529.woff2") format("woff2"), url("//db.onlinewebfonts.com/t/8e22783d707ad140bffe18b2a3812529.woff") format("woff"), url("//db.onlinewebfonts.com/t/8e22783d707ad140bffe18b2a3812529.ttf") format("truetype"), url("//db.onlinewebfonts.com/t/8e22783d707ad140bffe18b2a3812529.svg#Digital-7") format("svg");
+  }
 
 $border-one: 2px solid red;
-$border-two: 2px solid green;
+$border-two: 2px solid #464524;
 $border-three: 2px solid blue;
+
+
+$primary-background: linear-gradient(210deg,#FFE347,#FFE347);
+$container-background: #D1D06B;
+$display-background: black;
 
 html,body {
     margin: 0;
     height: 100vh;
-    width: 100vw;
+    background: $primary-background;
+    
 }
 
 
 .container {
-    height: 400px;
+    border: $border-two;
+    display: flex;
+    flex-direction: column;
     width: 25%;
-    border: $border-one;
+    background: $container-background;
     margin: 5% auto;
     display: flex;
     flex-direction: column;
-
+    min-height: 100%;
+    border-radius: 2px;
+   
+    box-shadow: 0px 3px 10px black;
     @media (max-width:768px) {
         width: 90%;
     }
 }
 
 .display-container {
+    height: auto;
+    background: $display-background;
     border: $border-two;
-    margin: 0.9%;
+    margin:1% 1% 1% 1%;
+    div{
+    //border: $border-three;
+  
+       min-height: 50px;
+       margin: 0;
+       display: flex;
+       justify-content: flex-end;
+       align-items: center;
+       flex-wrap: wrap;
+       font-family: 'Digital';
+        
+       &:nth-child(2) {
+            font-size: 2rem;
+            color: white;
+       }
 
-    p{
-        text-align: right;
+       &:nth-child(1) {
+            overflow-wrap: break-word;
+            word-wrap: break-word;
+            font-size: 1.2rem;
+            color: orange !important;
+       }
     }
+
+    
 }
 
 .button-container {
-    height: 100%;
-    margin: 0 0.9% 0.9% 0.9%; 
-    
+    opacity: .7;
+    margin: 0 0.9% 1% 0.9%; 
     display: grid;
     grid-template-columns:repeat(4,1fr);
     grid-template-rows: repeat(5,1fr);
@@ -54,8 +94,13 @@ html,body {
 
     grid-gap: 2px;
 
-    button {
-        font-weight: bolder;
+
+    .number {
+        background: #575655;
+    }
+
+    .operator {
+        background:#191716;
     }
 
     #add {
@@ -64,26 +109,32 @@ html,body {
 
     #subtract {
         grid-area: su;
+      
     }
 
     #multiply {
         grid-area: mu;
+    
     }
 
     #divide {
         grid-area: di;
+        ;
     }
     
     #one {
         grid-area:on;
+    
     }
 
     #two {
         grid-area: tw;
+      
     }
 
     #three {
         grid-area: th;
+ 
     }
 
     #four {
@@ -116,13 +167,44 @@ html,body {
 
     #decimal {
         grid-area: p;
+        background: #575655;
     }
     
     #clear {
         grid-area: a;
+        background:red;
     }
 
     #equals {
         grid-area: c;
+        background:rgb(9, 69, 236);
+    }
+
+    button {
+        font-weight: bolder;
+        padding : 15%;
+        transition: background 300ms ease-in-out, color 200ms cubic-bezier(0.075, 0.82, 0.165, 1);
+        border: none;
+        outline: none;
+        color:white;
+        &:hover {
+            background: white !important;
+            color:black !important;
+        }
     }
 }
+
+footer {
+    font-family: 'Share Tech';
+    text-align: center;
+    margin-bottom: 5%;
+    font-family: 'Caveat';
+    font-size: 1.2rem;
+    b i {
+        color:black;
+        font-size: 1.5rem;
+    }
+}
+
+
+
